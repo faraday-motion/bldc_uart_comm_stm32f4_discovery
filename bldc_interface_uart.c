@@ -23,8 +23,8 @@
  */
 
 #include "bldc_interface_uart.h"
-#include "ch.h"
-#include "hal.h"
+// #include "ch.h"  // remeoved as we do not use teh ChibiOS.
+// #include "hal.h" // remeoved as we do not use teh ChibiOS.
 #include "bldc_interface.h"
 
 // Settings
