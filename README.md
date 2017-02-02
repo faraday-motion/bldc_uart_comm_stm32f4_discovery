@@ -1,3 +1,7 @@
+
+Note that this is a fork from Benjamin's implementation. The fork was required for Faraday Motion is not using the ChibiOS and was causing compilation errors. 
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
 This is a test project for UART communication between the VESC and a stm32discovery board. Almost the full interface of the VESC is implemented in the example, only firmware upload is missing.  
   
 Connect PB10 (TX) to RX on the VESC  
