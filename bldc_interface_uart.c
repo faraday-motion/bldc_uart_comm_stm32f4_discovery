@@ -23,8 +23,6 @@
  */
 
 #include "bldc_interface_uart.h"
-// #include "ch.h"  // remeoved as we do not use teh ChibiOS.
-// #include "hal.h" // remeoved as we do not use teh ChibiOS.
 #include "bldc_interface.h"
 
 // Settings
@@ -84,7 +82,7 @@ static void process_packet(unsigned char *data, unsigned int len) {
 
 /**
  * Callback that bldc_interface uses to send packets.
- *
+ * 
  * @param data
  * Data array pointer
  * @param len
@@ -94,5 +92,3 @@ static void send_packet_bldc_interface(unsigned char *data, unsigned int len) {
 	// Pass the packet to the packet handler to add checksum, length, start and stop bytes.
 	packet_send_packet(data, len, PACKET_HANDLER);
 }
-
-

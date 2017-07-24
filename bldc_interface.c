@@ -545,6 +545,31 @@ void bldc_interface_set_current_brake(float current) {
 	send_packet_no_fwd(send_buffer, send_index);
 }
 
+void bldc_interface_set_current_dual(float current) {
+	int32_t send_index = 0;
+	send_buffer[send_index++] = COMM_FORWARD_CAN;
+	send_buffer[send_index++] = 1;
+	send_buffer[send_index++] = COMM_SET_CURRENT;
+	buffer_append_float32(send_buffer, current, 1000.0, &send_index);
+	send_packet_no_fwd(send_buffer, send_index);
+
+	//Hack, send only the last part of the package to the second controller
+	send_packet_no_fwd(send_buffer + 2, send_index - 2);
+}
+
+void bldc_interface_set_current_brake_dual(float current) {
+	int32_t send_index = 0;
+	send_buffer[send_index++] = COMM_FORWARD_CAN;
+	send_buffer[send_index++] = 1;
+	send_buffer[send_index++] = COMM_SET_CURRENT_BRAKE;
+	buffer_append_float32(send_buffer, current, 1000.0, &send_index);
+	send_packet_no_fwd(send_buffer, send_index);
+
+	//Hack, send only the last part of the package to the second controller
+	send_packet_no_fwd(send_buffer + 2, send_index - 2);
+}
+
+
 void bldc_interface_set_rpm(int rpm) {
 	int32_t send_index = 0;
 	fwd_can_append(send_buffer, &send_index);
@@ -826,7 +851,7 @@ void send_packet_no_fwd(unsigned char *data, unsigned int len) {
 }
 
 static void fwd_can_append(uint8_t *data, int32_t *ind) {
-	if (can_fwd_vesc >= 0) {
+	if (can_fwd_vesc >= -1) {
 		data[*ind++] = COMM_FORWARD_CAN;
 		data[*ind++] = can_fwd_vesc;
 	}
