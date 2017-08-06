@@ -571,7 +571,7 @@ void bldc_interface_set_current_brake_dual(float current) {
 
 void bldc_interface_set_current_quad(float current) {
 
-	for (i = 1; i < 4; i++ ) {
+	for (int32_t i = 1; i < 4; i++ ) {
 		int32_t send_index = 0;
 		send_buffer[send_index++] = COMM_FORWARD_CAN;
 		send_buffer[send_index++] = i;
@@ -585,7 +585,7 @@ void bldc_interface_set_current_quad(float current) {
 }
 
 void bldc_interface_set_current_brake_quad(float current) {
-	for (i = 1; i < 4; i++) {
+	for (int32_t i = 1; i < 4; i++) {
 		int32_t send_index = 0;
 		send_buffer[send_index++] = COMM_FORWARD_CAN;
 		send_buffer[send_index++] = i;
