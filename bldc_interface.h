@@ -49,6 +49,8 @@ void bldc_interface_set_current(float current);
 void bldc_interface_set_current_brake(float current);
 void bldc_interface_set_current_dual(float current);
 void bldc_interface_set_current_brake_dual(float current);
+void bldc_interface_set_current_quad(float current);
+void bldc_interface_set_current_brake_quad(float current);
 void bldc_interface_set_rpm(int rpm);
 void bldc_interface_set_pos(float pos);
 void bldc_interface_set_servo_pos(float pos);

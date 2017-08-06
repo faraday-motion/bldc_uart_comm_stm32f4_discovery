@@ -569,6 +569,34 @@ void bldc_interface_set_current_brake_dual(float current) {
 	send_packet_no_fwd(send_buffer + 2, send_index - 2);
 }
 
+void bldc_interface_set_current_quad(float current) {
+
+	for (i = 1; i < 4; i++ ) {
+		int32_t send_index = 0;
+		send_buffer[send_index++] = COMM_FORWARD_CAN;
+		send_buffer[send_index++] = i;
+		send_buffer[send_index++] = COMM_SET_CURRENT;
+		buffer_append_float32(send_buffer, current, 1000.0, &send_index);
+		send_packet_no_fwd(send_buffer, send_index);
+
+		//Hack, send only the last part of the package to the second controller
+		send_packet_no_fwd(send_buffer + 2, send_index - 2);
+	}
+}
+
+void bldc_interface_set_current_brake_quad(float current) {
+	for (i = 1; i < 4; i++) {
+		int32_t send_index = 0;
+		send_buffer[send_index++] = COMM_FORWARD_CAN;
+		send_buffer[send_index++] = i;
+		send_buffer[send_index++] = COMM_SET_CURRENT_BRAKE;
+		buffer_append_float32(send_buffer, current, 1000.0, &send_index);
+		send_packet_no_fwd(send_buffer, send_index);
+
+		//Hack, send only the last part of the package to the second controller
+		send_packet_no_fwd(send_buffer + 2, send_index - 2);
+	}
+}
 
 void bldc_interface_set_rpm(int rpm) {
 	int32_t send_index = 0;
